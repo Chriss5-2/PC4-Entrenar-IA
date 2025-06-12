@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  java-worker-1:
+    build: ./java-worker
+    container_name: java-worker-1
+    environment:
+      - WORKER_ID=java1
+      - PORT=5000
+      - MONITOR_PORT=8001
+    ports:
+      - "5000:5000"
+      - "8001:8001"
+      - "6000:6000"
+    networks:
+      - ai-network
+    volumes:
+      - ./data/java1:/data
+
+  java-worker-2:
+    build: ./java-worker
+    container_name: java-worker-2
+    environment:
+      - WORKER_ID=java2
+      - PORT=5001
+      - MONITOR_PORT=8002
+    ports:
+      - "5001:5001"
+      - "8002:8002"
+      - "6001:6001"
+    networks:
+      - ai-network
+    volumes:
+      - ./data/java2:/data
+
+  python-worker-1:
+    build: ./python-worker
+    container_name: python-worker-1
+    environment:
+      - WORKER_ID=python1
+      - PORT=5002
+      - MONITOR_PORT=8003
+    ports:
+      - "5002:5002"
+      - "8003:8003"
+      - "6002:6002"
+    networks:
+      - ai-network
+    volumes:
+      - ./data/python1:/data
+
+  python-worker-2:
+    build: ./python-worker
+    container_name: python-worker-2
+    environment:
+      - WORKER_ID=python2
+      - PORT=5003
+      - MONITOR_PORT=8004
+    ports:
+      - "5003:5003"
+      - "8004:8004"
+      - "6003:6003"
+    networks:
+      - ai-network
+    volumes:
+      - ./data/python2:/data
+
+networks:
+  ai-network:
+    driver: bridge
