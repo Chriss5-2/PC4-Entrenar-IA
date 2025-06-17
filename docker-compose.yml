@@ -65,6 +65,38 @@ services:
     volumes:
       - ./data/python2:/data
 
+  js-worker-1:
+    build: ./js-worker
+    container_name: js-worker-1
+    environment:
+      - WORKER_ID=js1
+      - PORT=5004
+      - MONITOR_PORT=8005
+    ports:
+      - "5004:5004"
+      - "8005:8005"
+      - "6004:6004"
+    networks:
+      - ai-network
+    volumes:
+      - ./data/js1:/data
+  
+  js-worker-2:
+    build: ./js-worker
+    container_name: js-worker-2
+    environment:
+      - WORKER_ID=js2
+      - PORT=5005
+      - MONITOR_PORT=8006
+    ports:
+      - "5005:5005"
+      - "8006:8006"
+      - "6005:6005"
+    networks:
+      - ai-network
+    volumes:
+      - ./data/js2:/data
+
 networks:
   ai-network:
     driver: bridge

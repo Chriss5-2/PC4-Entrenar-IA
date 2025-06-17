@@ -32,7 +32,7 @@ class ClientGUI:
         self.port_entry.grid(row=0, column=3, padx=5)
         
         self.connect_btn = ttk.Button(conn_frame, text="Conectar", 
-                                     command=self.connect)
+                                    command=self.connect)
         self.connect_btn.grid(row=0, column=4, padx=5)
         
         # Tabs
