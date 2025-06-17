@@ -12,8 +12,8 @@ def evaluar_desempeno_predicciones(host, port, modelo_id, num_predicciones=1000)
     exitos = 0
 
     for i in range(num_predicciones):
-        # Genera datos de entrada aleatorios (ajusta según tu formato)
-        input_data = ",".join(str(random.randint(1, 100)) for _ in range(5))
+        # Genera un solo número aleatorio como entrada
+        input_data = str(random.randint(1, 100))
         inicio = time.time()
         respuesta = client.predict(modelo_id, input_data)
         fin = time.time()
