@@ -1,9 +1,12 @@
-Usar:
-1.- Levantar docker general
-PS C:\Users\CHRISTIAN\Desktop\ConcurrentePC's\PC4-CC4P1-Entrenar-IA> docker compose up -d 
+# Instrucciones:
+---
+# Levantar docker general
+```bash
+PS C:\Users\CHRISTIAN\Desktop\ConcurrentePC's\PC4-CC4P1-Entrenar-IA> docker compose up -d
+```
 ---
 
-2.- Levantar clientes
+# Levantar clientes
 ### Usando el cliente en la terminal
 ```bash
 PS C:\Users\CHRISTIAN\Desktop\ConcurrentePC's\PC4-CC4P1-Entrenar-IA\client>
@@ -24,5 +27,7 @@ PS C:\Users\CHRISTIAN\Desktop\ConcurrentePC's\PC4-CC4P1-Entrenar-IA\client> pyth
 5005 -> js2
 ```
 
-3.- Borrar containers
+# Borrar containers
+```bash
 PS C:\Users\CHRISTIAN\Desktop\ConcurrentePC's\PC4-CC4P1-Entrenar-IA> docker-compose down   
+```
