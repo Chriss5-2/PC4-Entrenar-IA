@@ -97,6 +97,38 @@ services:
     volumes:
       - ./data/js2:/data
 
+  ts-worker-1:
+    build: ./ts-worker
+    container_name: ts-worker-1
+    environment:
+      - WORKER_ID=ts1
+      - PORT=5006
+      - MONITOR_PORT=8007
+    ports:
+      - "5006:5006"
+      - "8007:8007"
+      - "6006:6006"
+    networks:
+      - ai-network
+    volumes:
+      - ./data/ts1:/data
+
+  ts-worker-2:
+    build: ./ts-worker
+    container_name: ts-worker-2
+    environment:
+      - WORKER_ID=ts2
+      - PORT=5007
+      - MONITOR_PORT=8008
+    ports:
+      - "5007:5007"
+      - "8008:8008"
+      - "6007:6007"
+    networks:
+      - ai-network
+    volumes:
+      - ./data/ts2:/data
+
 networks:
   ai-network:
     driver: bridge
