@@ -1,5 +1,31 @@
 import socket
 import sys
+# Agregando
+import random
+import time
+
+# Simulación con 1000 clientes
+# que envían solicitudes al servidor
+def evaluar_desempeno_predicciones(host, port, modelo_id, num_predicciones=1000):
+    client = SimpleClient(host, port)
+    tiempos = []
+    exitos = 0
+
+    for i in range(num_predicciones):
+        # Genera un solo número aleatorio como entrada
+        input_data = str(random.randint(1, 100))
+        inicio = time.time()
+        respuesta = client.predict(modelo_id, input_data)
+        fin = time.time()
+        tiempos.append(fin - inicio)
+        if respuesta.startswith("OK|"):
+            exitos += 1
+        if i % 100 == 0:
+            print(f"Enviadas {i} predicciones...")
+
+    print(f"Total exitosas: {exitos}/{num_predicciones}")
+    print(f"Tiempo promedio por predicción: {sum(tiempos)/len(tiempos):.4f} segundos")
+
 
 class SimpleClient:
     def __init__(self, host="localhost", port=5000):
@@ -61,9 +87,10 @@ def main():
         print("1. Verificar estado")
         print("2. Entrenar modelo")
         print("3. Hacer predicción")
-        print("4. Salir")
+        print("4. Evaluar desempeño de predicciones (1000 solicitudes)")
+        print("5. Salir")
         
-        choice = input("Seleccione una opción (1-4): ").strip()
+        choice = input("Seleccione una opción (1-5): ").strip()
         
         if choice == "1":
             client.check_status()
@@ -97,8 +124,13 @@ def main():
                 client.predict(model_id, input_data)
             else:
                 print("ERROR: Debe proporcionar ID del modelo y datos de entrada")
-                
+
         elif choice == "4":
+            print("\nEvaluando desempeño de predicciones (1000 solicitudes)...")
+            default_model = input("ID del modelo a evaluar (default_model): ").strip() or "default_model"
+            evaluar_desempeno_predicciones(host, port, default_model, num_predicciones=1000)
+
+        elif choice == "5":
             print("¡Hasta luego!")
             break
             
